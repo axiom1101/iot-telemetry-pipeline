@@ -1,16 +1,15 @@
 # iot-telemetry-pipeline
 Pet-project 
 
-iot-telemetry-pipeline/
-├── docker-compose.yml          # Mosquitto, TimescaleDB, Grafana, FastAPI-app
-├── simulator/
-│   └── device_simulator.py     # asyncio, генерит JSON телеметрию -> MQTT (каждые 5 сек)
-├── ingestion/
-│   ├── main.py                 # FastAPI: POST /telemetry (валидация Pydantic) -> TimescaleDB
-│   ├── models.py               # SQLAlchemy (Core) модели
-│   └── database.py             # asyncpg connection pool
-├── ml/
-│   └── anomaly_detector.py     # Isolation Forest (sklearn) на последних N точках
-├── grafana/
-│   └── dashboards/             # JSON дашборды (импорт через provisioning)
-└── README.md                   # Архитектура, как запустить, почему FastAPI/TimescaleDB, как масштабировать
+## README.MD — ТОЧКА ВХОДА ДЛЯ СОБЕСЕДУЮЩЕГО
+
+> **Обязательные секции:**
+> 1.  **One-liner:** "End-to-end IoT Telemetry Pipeline: Simulator → MQTT → FastAPI → TimescaleDB → Grafana + ML Anomaly Detection".
+> 2.  **Architecture Diagram** (Mermaid/SVG).
+> 3.  **Quick Start:** `cp .env.example .env && docker compose up -d` → Grafana `localhost:3000` (admin/admin), API `localhost:8000/docs`.
+> 4.  **Key Technical Decisions (ADR Summary)** — ссылки на ADR.
+> 5.  **API Docs:** Ссылка на `/docs` (Swagger UI).
+> 6.  **How to Test:** `pytest`, `locust -f load_test.py`.
+> 7.  **What I Learned / Challenges:** (Например: "Батчинг в asyncpg дал x10 throughput", "Continuous Aggregates в TimescaleDB ускорили дашборды в 50 раз").
+
+---
